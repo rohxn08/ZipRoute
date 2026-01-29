@@ -5,8 +5,8 @@ pandas
 scikit-learn
 xgboost
 joblib
-paddleocr==2.7.2
-paddlepaddle-gpu==2.5.2
+paddleocr>=2.7.3
+paddlepaddle>=2.6.0
 requests
 numpy==1.26.4
 python-multipart

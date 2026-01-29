@@ -1,0 +1,68 @@
+# --- Operating System Files ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+.Spotlight-V100
+.Trashes
+
+# --- IDE & Editor Config ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+.settings/
+
+# --- Python (Backend) ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv
+venv/
+ENV/
+env/
+instance/
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+.mypy_cache/
+
+# --- Flutter/Android/iOS (Frontend) ---
+# (Ideally handled by frontend/.gitignore, but good to have safety here)
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.packages
+pubspec.lock
+
+# --- Android specific ---
+**/android/local.properties
+**/android/.gradle
+**/android/app/build
+**/android/captures
+**/android/gradlew
+**/android/gradlew.bat
+
+# --- Logs & Databases ---
+*.log
+*.sqlite
+*.db
+db/training_data.db
+db/auth.db
+
+# --- Secrets & Keys ---
+credentials.json
+token.json
+client_secret.json
+service_account.json
+key.properties

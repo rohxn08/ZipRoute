@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 class ApiConfig {
   // Production backend (Render)
-  static const String prodBaseUrl = '';
+  static const String prodBaseUrl = 'http://192.168.1.3:8000';
   
   // ngrok URLs (add your ngrok URL here)
   static const List<String> ngrokUrls = [
@@ -15,7 +15,7 @@ class ApiConfig {
   
   // Common local development URLs to try
   static const List<String> localUrls = [
-    'http://192.168.0.101:8000',  // Your current IP
+    'http://192.168.1.3:8000',  // Your current IP
     'http://192.168.1.101:8000',  // Common alternative
     'http://10.0.2.2:8000',       // Android emulator
     'http://localhost:8000',       // Local development
@@ -174,7 +174,10 @@ class ApiConfig {
         }
       }
     } catch (e) {
-      print('Error getting network info: $e');
+      // Silently ignore unsupported operation errors (common on Web)
+      if (!e.toString().contains('Unsupported operation')) {
+        print('Error getting network info: $e');
+      }
     }
     
     return {

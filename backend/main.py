@@ -61,8 +61,13 @@ load_env_file()
 
 # --- Initialize Models ---
 try:
-    eta_model = joblib.load('/home/tejas/Projects/Delivery_route_optimize/delivery-route-app/backend/eta_prediction_model.pkl')
-    model_columns = joblib.load('/home/tejas/Projects/Delivery_route_optimize/delivery-route-app/backend/model_columns.pkl')
+    # Use relative paths for better portability
+    current_dir = os.path.dirname(__file__)
+    eta_model_path = os.path.join(current_dir, 'eta_prediction_model.pkl')
+    model_columns_path = os.path.join(current_dir, 'model_columns.pkl')
+    
+    eta_model = joblib.load(eta_model_path)
+    model_columns = joblib.load(model_columns_path)
     logger.info("ML models loaded successfully")
 except Exception as e:
     logger.warning(f"Could not load ML models: {e}")

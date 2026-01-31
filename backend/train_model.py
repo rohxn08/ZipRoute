@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 import xgboost as xgb
-from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import joblib
 import sys
 import sqlite3
@@ -37,7 +37,8 @@ try:
         print("⚠️  Warning: Less than 10 user records found. Using fallback dataset.")
         # Fallback to original dataset
         try:
-            df = pd.read_csv('/home/tejas/Projects/Delivery_route_optimize/delivery-route-app/backend/dataset/delhivery_data.csv')
+            dataset_path = os.path.join(os.path.dirname(__file__), 'dataset', 'delhivery_data.csv')
+            df = pd.read_csv(dataset_path)
             print(f"✅ Step 1b: Successfully loaded fallback 'delhivery_data.csv'. Shape: {df.shape}")
         except FileNotFoundError:
             print("❌ FATAL ERROR: No user data and fallback dataset not found.")
@@ -171,7 +172,14 @@ print("✅ Model training complete!")
 # --- Step 6: Evaluate and Save ---
 predictions = model.predict(X_test)
 mae = mean_absolute_error(y_test, predictions)
-print(f"\n📊 Step 6: Model Evaluation - Mean Absolute Error (MAE): {mae:.2f} minutes")
+mse = mean_squared_error(y_test, predictions)
+rmse = np.sqrt(mse)
+r2 = r2_score(y_test, predictions)
+
+print(f"\n📊 Step 6: Model Evaluation Metrics:")
+print(f"   - Mean Absolute Error (MAE): {mae:.2f} minutes")
+print(f"   - Root Mean Sq. Error (RMSE): {rmse:.2f} minutes")
+print(f"   - R-Squared Score (R²): {r2:.4f}")
 joblib.dump(model, 'eta_prediction_model.pkl')
 joblib.dump(list(X_train.columns), 'model_columns.pkl')
 print("✅ Model and columns saved successfully.")
